@@ -8,6 +8,7 @@
 #include "objects/gameplay_dangeon_keep/gameplay_dangeon_keep.h"
 #include "objects/object_bdoor/object_bdoor.h"
 #include "soh/ObjectExtension/ObjectExtension.h"
+#include "soh/ObjectExtension/ActorMaximumHealth.h"
 #include "soh/ObjectExtension/ActorListIndex.h"
 #include "soh/frame_interpolation.h"
 #include "soh/Enhancements/cosmetics/cosmeticsTypes.h"
@@ -1264,7 +1265,7 @@ void Actor_Init(Actor* actor, PlayState* play) {
 
             // For enemy health bar we need to know the max health during init
             if (actor->category == ACTORCAT_ENEMY) {
-                actor->maximumHealth = actor->colChkInfo.health;
+                SetActorMaximumHealth(actor, actor->colChkInfo.health);
             }
         } else {
             actor->init = NULL;
@@ -2642,7 +2643,7 @@ void Actor_UpdateAll(PlayState* play, ActorContext* actorCtx) {
 
                         // For enemy health bar we need to know the max health during init
                         if (actor->category == ACTORCAT_ENEMY) {
-                            actor->maximumHealth = actor->colChkInfo.health;
+                            SetActorMaximumHealth(actor, actor->colChkInfo.health);
                         }
                     } else {
                         actor->init = NULL;
